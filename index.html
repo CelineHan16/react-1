@@ -11,25 +11,62 @@
 <body>
   <script src="https://unpkg.com/react@16.7.0/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@16.7.0/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
 
   <div id="root"></div>
   <div id="rootReact"></div>
+  <div id="rootJSX"></div>
+  
 
   <!-- <div><span>??</span></div> -->
 
-  <script>
-    //Classic JavaScript
-    const div = document.createElement('div');
-    div.className = "hello-world";
-    document.querySelector('#root').append(div);
-    const span = document.createElement('span');
-    div.append(span);
-    const strong = document.createElement('strong');
-    strong.textContent = Math.random();
-    span.append(strong);
-    const mark = document.createElement('mark');
-    mark.textContent = " - this is a random number";
-    span.append(mark);
+  <script type="text/babel">
+    function RandomNumber(props) {
+      return (
+        <div className="hello-world">
+          <span>
+            <strong>{(Math.random() * props.max).toFixed()}</strong>
+            <mark> - this is a random number</mark>
+          </span>
+        </div>
+      );
+    };
+
+    function MyComponent() {
+      return (
+        <div className="hello-world">
+          <h1>Hello World</h1>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus minus qui tempore iusto totam placeat, cum magni. Voluptas id dolores sed eligendi quas vitae quaerat ut optio. Expedita, quos reiciendis.</p>
+        </div>
+      )
+    }
+
+    const App = (
+      <div>
+        <RandomNumber max={10} />
+        <RandomNumber max={100} />
+        <RandomNumber max={1000} />
+        <RandomNumber max={10000} />
+        <MyComponent />
+      </div>
+    )
+
+    ReactDOM.render(App, document.querySelector('#root'));
+  </script>
+
+  <script type="text/babel">
+    const jsxDiv = (
+      <div className="hello-world">
+        <span>
+          <strong>{Math.random()}</strong>
+          <mark> - this is a random number</mark>
+        </span>
+      </div>
+    );
+
+
+    ReactDOM.render(reactDiv, document.querySelector('#rootJSX'));
+  // console.log(reactDiv);
   </script>
 
   <script>
