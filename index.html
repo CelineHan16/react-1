@@ -1,34 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
   <script src="https://unpkg.com/react@16.7.0/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@16.7.0/umd/react-dom.production.min.js"></script>
 
   <div id="root"></div>
   <div id="rootReact"></div>
-  
+
+  <!-- <div><span>??</span></div> -->
+
   <script>
     //Classic JavaScript
     const div = document.createElement('div');
-    div.textContent = Math.random();
     div.className = "hello-world";
     document.querySelector('#root').append(div);
+    const span = document.createElement('span');
+    div.append(span);
+    const strong = document.createElement('strong');
+    strong.textContent = Math.random();
+    span.append(strong);
+    const mark = document.createElement('mark');
+    mark.textContent = " - this is a random number";
+    span.append(mark);
   </script>
 
   <script>
     //React JavaScript
     const reactDiv = React.createElement('div', {
       className: "hello-world",
-      children: Math.random(),
-    });
+    }, React.createElement('span', {},
+      React.createElement('strong', {}, Math.random()),
+      React.createElement('mark', {}, " - this is a random number")
+    ));
+
+    React.createElement(
+      'div', // 1. tag
+      { className: 'hello-world' }, // 2. props - attributes
+      "test", // 3-N. children
+    )
+
     ReactDOM.render(reactDiv, document.querySelector('#rootReact'));
     // console.log(reactDiv);
   </script>
 </body>
+
 </html>
